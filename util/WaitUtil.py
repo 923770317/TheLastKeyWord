@@ -13,18 +13,30 @@ class WaitUtil(object):
                                  'class_name':By.CLASS_NAME,
                                  'tag_name':By.TAG_NAME,
                                  'link_text':By.LINK_TEXT,
-                                 'partial_link_text':By.PARTIAL_LINK_TEXT}
+                                 'partial_link_text':By.PARTIAL_LINK_TEXT,
+                                'css_selector':By.CSS_SELECTOR}
         self.driver = driver
         self.wait = WebDriverWait(self.driver,30)
 
-    def frame_available_and_switch_to_it(self,locationType,locationExpress):
+    def presenceOfElementLocated(self,locatorMethod,locationExpress,*arg):
         try:
-            element = self.wait.until(EC.frame_to_be_available_and_switch_to_it((self.locationTypeDict[locationType.lower()],locationExpress)))
+            if self.locationTypeDict.has_key(locatorMethod.lower()):
+                self.wait.until(EC.presence_of_element_located((self.locationTypeDict[locatorMethod.lower()],locationExpress)))
+            else:
+                raise TypeError(u'未找到定位方式')
+        except Exception,e:
+            raise e
+
+
+
+    def frame_available_and_switch_to_it(self,locationType,locationExpress,*arg):
+        try:
+            element = self.wait.until(EC.frame_to_be_available_and_switch_to_it(()))
             return element
         except Exception,e:
             raise e
 
-    def visibility_element_located(self,locationType,locationExpress):
+    def visibility_element_located(self,locationType,locationExpress,*arg):
         try:
             element = self.wait.until(EC.visibility_of_any_elements_located((self.locationTypeDict[locationType.lower()],locationExpress)))
         except Exception,e:
