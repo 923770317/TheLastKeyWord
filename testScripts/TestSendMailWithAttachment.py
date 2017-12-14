@@ -4,14 +4,18 @@ from util.WaitUtil import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
+from action.PageAction import *
 
 
 def TestSendMailWithAttachment():
-    driver = webdriver.Firefox()
-    driver.maximize_window()
+    # driver = webdriver.Firefox()
+    # driver.maximize_window()
+    open_browser('firefox')
+    maximize_browser()
     print u'启动浏览器成功'
     print u'访问126邮箱登录页...'
-    driver.get("http://mail.126.com")
+    # driver.get("http://mail.126.com")
+    visit_url("http://mail.126.com")
     time.sleep(3)
 
     assert u'126网易免费邮--你的专业电子邮局' in driver.title
