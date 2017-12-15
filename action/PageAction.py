@@ -151,6 +151,7 @@ def waitFrameToBeAvailableAndSwitchToIt(locationType,locationExpression,*arg):
     except Exception, e:
         raise e
 
+
 def waitVisiblityOfElementLocated(locationType,locationExpression,*arg):
     global waitUtil
     try:
